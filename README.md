@@ -71,8 +71,10 @@ Sytem is used in following way:
    Users with this pricing will be charged 20 flat fee on each item with extra charge of 2% on unit of volume of stored items
     and will get 5% discount for each 100 items store. 5% on first 100, 10% on second 100, and so on up to 15%
     
+    
 2. Pricing is assigned to user through /api/users endpoint;
-    a) to create user with need pricing one has to post to /api/users following request
+    
+  a) to create user with need pricing one has to post to /api/users following request
     
     ```js
     {

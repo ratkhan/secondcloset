@@ -24,7 +24,6 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use(cors());
 app.use(express.json({limit: '50mb'}));
 app.use(middleware.requestLogger);
-app.use(middleware.tokenExtractor);
 app.use('/api/users', usersRouter);
 app.use('/api/pricing', pricingRouter);
 app.use('/api/price', priceRouter);

@@ -2,13 +2,6 @@
 technical assessment for second closet
 
 
-<!-- ABOUT THE PROJECT -->
-Techincal assesment for second closet
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-
 ### Prerequisites
 Requires running instance of mongodb.
 Passed as MONGODB_URI
@@ -25,7 +18,8 @@ http://15.222.247.57:3001/api/
 
 Sytem is used in following way:
 1. Creating pricing of one of the follow 4 types
-'PLAIN', 'VALUE', 'VOLUME', 'NUMBER_VOLUME'.
+   'PLAIN', 'VALUE', 'VOLUME', 'NUMBER_VOLUME'.
+  
   a) To create a plain pricing post to /api/pricing following data:
   
   ```js

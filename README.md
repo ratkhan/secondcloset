@@ -27,32 +27,42 @@ Sytem is used in following way:
 1. Creating pricing of one of the follow 4 types
 'PLAIN', 'VALUE', 'VOLUME', 'NUMBER_VOLUME'.
   a) To create a plain pricing post to /api/pricing following data:
+  
+  ```js
    {
         "type": 'PLAIN',
         "name": 'PLAIN5',
         "flat_fee": 20,
         "discount": 0.05,
-    },
-    
-    Users with this pricing will be charged 20 flat fee on each item with 5% discount
+    }
+  ```
+   Users with this pricing will be charged 20 flat fee on each item with 5% discount
+   
    b) To create a volume pricing post to /api/pricing following data
+   
     {
         "type": "VOLUME",
         "name": "VOLUME1",
         "flat_fee": 20,
         "price_per_volume": 1,
     }
-    Users with this pricing will be charged 20 flat fee on each item with extra charge of 1$ on 1 volume.
+    
+   Users with this pricing will be charged 20 flat fee on each item with extra charge of 1$ on 1 volume.
+   
    c) To create a value pricing post to /api/pricing following data
+   
     {
         "type": 'VALUE',
         "name": 'VALUE5',
         "flat_fee": 20,
         "price_per_value": 0.05,
     }
-    Users with this pricing will be charged 20 flat fee on each item with extra charge of 5% on value of stored items.
-
-    d) To create a number and volume pricing post to /api/pricing following data
+    
+   
+   Users with this pricing will be charged 20 flat fee on each item with extra charge of 5% on value of stored items.
+   
+   d) To create a number and volume pricing post to /api/pricing following data
+   
     {
         type: 'NUMBER_VOLUME',
         name: 'NUMBER100_VOLUME2',
@@ -63,20 +73,28 @@ Sytem is used in following way:
         max_discount: 0.15,
         price_per_volume: 2,
     }
-      Users with this pricing will be charged 20 flat fee on each item with extra charge of 2% on unit of volume of stored items
-      and will get 5% discount for each 100 items store. 5% on first 100, 10% on second 100, and so on up to 15%
+    
+   Users with this pricing will be charged 20 flat fee on each item with extra charge of 2% on unit of volume of stored items
+    and will get 5% discount for each 100 items store. 5% on first 100, 10% on second 100, and so on up to 15%
+    
 2. Pricing is assigned to user through /api/users endpoint;
     a) to create user with need pricing one has to post to /api/users following request
+    
+    ```js
     {
-	    "username":"PersonFour",
+      "username":"PersonFour",
       "name":"PersonWithNumberPricing",
       "pricing":"5f97850c0433fe3770ccea4d"
-      }
-      
-      where pricing is id referenced from previous created pricings.
+    }
+    ```
+    
+    Where pricing is id referenced from previous created pricings.
       
 3. To get price to store items send get request to /api/price/:user_id endpoint with items to be stored:
-  {
+
+
+    ```js
+  	{
 	    "items":[
        {
         "name":"Fridge",
@@ -96,6 +114,7 @@ Sytem is used in following way:
       }
       ]
     }
+    ```
     
     return will calculated based on pricing assigned to a user and be return as follows:
     {
@@ -103,9 +122,13 @@ Sytem is used in following way:
     }
     
  4. To change pricing data send put request ot api/pricing with attribute that need to be changed, for example
+
+      ```js
       { 
         "flat_fee": 25
       }
-      This request will change the flat_fee for all pricing to 25$
+      ```
+      
+  This request will change the flat_fee for all pricing to 25$
  
  

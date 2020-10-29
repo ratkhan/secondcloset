@@ -100,14 +100,6 @@ const expectedPrices = [
 ];
 
 
-const notExistingId = async () => {
-    const blog = new Blog({title: 'EmptyBlog'});
-    await blog.save();
-    await blog.remove();
-
-    return blog._id.toString();
-};
-
 const pricingInDb = async () => {
     const pricings = await Pricing.find({});
     return pricings.map(pricing => pricing.toJSON());
@@ -123,7 +115,6 @@ module.exports = {
     initialPricing,
     items,
     expectedPrices,
-    notExistingId,
     pricingInDb,
     usersInDbByUsername
 };

@@ -51,7 +51,65 @@ describe('Pricing test', () => {
     describe('Calculating the right price for pricing ' + currentPricing.name, () => {
         let user;
         test('setting pricing ' + currentPricing.name + ' to a user' , async () => {
+            currentPricing = helper.initialPricing[0];
+            currentUser = helper.initialUsers[0];
+            //get the pricing by name
+            const pricing = await api.get('/api/pricing/name/' + currentPricing.name);
+            expect(pricing.body).toMatchObject({name: currentPricing.name});
 
+            //create a user with the pricing
+            const userToSave = {...currentUser,...{pricing:pricing.body.id}};
+
+            await api.post('/api/users/').send(userToSave);
+            user = await helper.usersInDbByUsername(userToSave.username);
+            expect(user.pricing.toJSON()).toEqual(pricing.body.id);
+        }
+        );
+
+        test('calculating right price for  ' + currentPricing.name, async () => {
+            const expectedPrice = helper.expectedPrices.filter(price => price.name === currentPricing.name);
+            //get the price for items
+            const price = await api.get('/api/price/' + user.id).send(items);
+            expect(price.body.price).toEqual(expectedPrice[0].price);
+        }
+        );
+    });
+
+
+    describe('Calculating the right price for pricing ' + currentPricing.name, () => {
+        let user;
+        test('setting pricing ' + currentPricing.name + ' to a user' , async () => {
+            currentPricing = helper.initialPricing[1];
+            currentUser = helper.initialUsers[1];
+            //get the pricing by name
+            const pricing = await api.get('/api/pricing/name/' + currentPricing.name);
+            expect(pricing.body).toMatchObject({name: currentPricing.name});
+
+            //create a user with the pricing
+            const userToSave = {...currentUser,...{pricing:pricing.body.id}};
+
+            await api.post('/api/users/').send(userToSave);
+            user = await helper.usersInDbByUsername(userToSave.username);
+
+            expect(user.pricing.toJSON()).toEqual(pricing.body.id);
+        }
+        );
+
+        test('calculating right price for  ' + currentPricing.name, async () => {
+            const expectedPrice = helper.expectedPrices.filter(price => price.name === currentPricing.name);
+            //get the price for items
+            const price = await api.get('/api/price/' + user.id).send(items);
+            expect(price.body.price).toEqual(expectedPrice[0].price);
+        }
+        );
+    });
+
+
+    describe('Calculating the right price for pricing ' + currentPricing.name, () => {
+        let user;
+        test('setting pricing ' + currentPricing.name + ' to a user' , async () => {
+            currentPricing = helper.initialPricing[2];
+            currentUser = helper.initialUsers[2];
             //get the pricing by name
             const pricing = await api.get('/api/pricing/name/' + currentPricing.name);
             expect(pricing.body).toMatchObject({name: currentPricing.name});
@@ -73,66 +131,12 @@ describe('Pricing test', () => {
         );
     });
 
-    currentPricing = helper.initialPricing[1];
-    currentUser = helper.initialUsers[1];
+
     describe('Calculating the right price for pricing ' + currentPricing.name, () => {
         let user;
         test('setting pricing ' + currentPricing.name + ' to a user' , async () => {
-
-            //get the pricing by name
-            const pricing = await api.get('/api/pricing/name/' + currentPricing.name);
-            expect(pricing.body).toMatchObject({name: currentPricing.name});
-
-            //create a user with the pricing
-            const userToSave = {...currentUser,...{pricing:pricing.body.id}};
-            await api.post('/api/users/').send(userToSave);
-            user = await helper.usersInDbByUsername(userToSave.username);
-            expect(user.pricing.toJSON()).toEqual(pricing.body.id);
-        }
-        );
-
-        test('calculating right price for  ' + currentPricing.name, async () => {
-            const expectedPrice = helper.expectedPrices.filter(price => price.name === currentPricing.name);
-            //get the price for items
-            const price = await api.get('/api/price/' + user.id).send(items);
-            expect(price.body.price).toEqual(expectedPrice[0].price);
-        }
-        );
-    });
-
-    currentPricing = helper.initialPricing[2];
-    currentUser = helper.initialUsers[2];
-    describe('Calculating the right price for pricing ' + currentPricing.name, () => {
-        let user;
-        test('setting pricing ' + currentPricing.name + ' to a user' , async () => {
-
-            //get the pricing by name
-            const pricing = await api.get('/api/pricing/name/' + currentPricing.name);
-            expect(pricing.body).toMatchObject({name: currentPricing.name});
-
-            //create a user with the pricing
-            const userToSave = {...currentUser,...{pricing:pricing.body.id}};
-            await api.post('/api/users/').send(userToSave);
-            user = await helper.usersInDbByUsername(userToSave.username);
-            expect(user.pricing.toJSON()).toEqual(pricing.body.id);
-        }
-        );
-
-        test('calculating right price for  ' + currentPricing.name, async () => {
-            const expectedPrice = helper.expectedPrices.filter(price => price.name === currentPricing.name);
-            //get the price for items
-            const price = await api.get('/api/price/' + user.id).send(items);
-            expect(price.body.price).toEqual(expectedPrice[0].price);
-        }
-        );
-    });
-
-    currentPricing = helper.initialPricing[3];
-    currentUser = helper.initialUsers[3];
-    describe('Calculating the right price for pricing ' + currentPricing.name, () => {
-        let user;
-        test('setting pricing ' + currentPricing.name + ' to a user' , async () => {
-
+            currentPricing = helper.initialPricing[3];
+            currentUser = helper.initialUsers[3];
             //get the pricing by name
             const pricing = await api.get('/api/pricing/name/' + currentPricing.name);
             expect(pricing.body).toMatchObject({name: currentPricing.name});
